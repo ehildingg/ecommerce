@@ -1,9 +1,12 @@
+import 'package:ecommerce/buisness_logic/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/cart_singleton.dart';
 import '../widget/global_app_bar.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({super.key});
+  DetailsPage({super.key});
   static const routeName = '/details';
 
   @override
@@ -46,6 +49,20 @@ class DetailsPage extends StatelessWidget {
   }
 
   _buildBottomNavigationBar() {
+    return BottomNavbar();
+  }
+}
+
+class BottomNavbar extends StatelessWidget {
+  BottomNavbar({
+    Key? key,
+  }) : super(key: key);
+
+  var cartSingleton = Cart();
+  var secondCartSingleton = Cart();
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 50.0,
       child: Row(
@@ -56,7 +73,9 @@ class DetailsPage extends StatelessWidget {
             fit: FlexFit.tight,
             flex: 1,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                print(cartSingleton.valueGetter);
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
                   shape: const RoundedRectangleBorder(
@@ -88,7 +107,9 @@ class DetailsPage extends StatelessWidget {
                   backgroundColor: Colors.greenAccent,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(0)))),
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<CartCubit>(context).addToCart();
+              },
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/details_page.dart';
-import '../dummy_data.dart';
+import '../../data/dummy_data.dart';
 
 class DetailsItem extends StatelessWidget {
   final int index;
