@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widget/details_item.dart';
-import '../dummy_data.dart';
+import '../../data/dummy_data.dart';
 import '../widget/global_app_bar.dart';
 
 class Home extends StatelessWidget {
@@ -10,23 +10,24 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const GlobalAppBar('Home'),
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 1,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-            ),
-            itemCount: myItems.length,
-            itemBuilder: (context, index) {
-              return DetailsItem(index);
-            },
+      appBar: const GlobalAppBar('Home'),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 1,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
           ),
+          itemCount: myItems.length,
+          itemBuilder: (context, index) {
+            return DetailsItem(index);
+          },
         ),
-        bottomNavigationBar: _buildBottomNavigationBar());
+      ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
   }
 
   _buildBottomNavigationBar() {
