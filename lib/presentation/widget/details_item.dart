@@ -11,6 +11,7 @@ class DetailsItem extends StatelessWidget {
     Navigator.of(context).pushNamed(DetailsPage.routeName, arguments: {
       'id': myItems[index]['id'].toString(),
       'name': myItems[index]['name'].toString(),
+      'price': double.parse(myItems[index]['price'])
     });
   }
 

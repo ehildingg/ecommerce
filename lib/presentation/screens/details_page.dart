@@ -12,7 +12,7 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+        ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
     // final detailsId = routeArgs['id'];
     final detailsName = routeArgs['name'].toString();
 
@@ -63,6 +63,9 @@ class BottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final routeArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
+    final price = double.parse(routeArgs['price'].toString());
     return SizedBox(
       height: 50.0,
       child: Row(
@@ -108,7 +111,7 @@ class BottomNavbar extends StatelessWidget {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(0)))),
               onPressed: () {
-                BlocProvider.of<CartCubit>(context).addToCart();
+                BlocProvider.of<CartCubit>(context).addToCart(price);
               },
               child: Center(
                 child: Row(
