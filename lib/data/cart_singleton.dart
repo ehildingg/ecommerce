@@ -1,21 +1,29 @@
 //Flödet = Singleton -> ValueListener -> Cubit -> UI?
 
+import 'package:ecommerce/data/models/Product.dart';
 import 'package:flutter/material.dart';
 
 class Cart with ChangeNotifier {
   static final Cart _cart = Cart._internal();
-  int cartSize = 0;
 
-  ValueNotifier<double> cartValue = ValueNotifier<double>(2.0);
+  ValueNotifier<List<Product>> cartItems = ValueNotifier<List<Product>>([]);
+
   // double cartValue = 2.0;
 
   double get valueGetter {
-    // return cartValue;
-    return cartValue.value;
+    double sum = 0;
+
+    for (var item in cartItems.value) {
+      sum += item.price;
+    }
+    sum = double.parse(sum.toStringAsFixed(3));
+    print(sum);
+
+    return sum;
   }
 
-  void valueSetter(double input) {
-    cartValue.value = cartValue.value += input;
+  void valueSetter(input) {
+    cartItems.value.add(input);
     notifyListeners();
     // cartValue = cartValue += input;
   }

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/cart_singleton.dart';
+import '../../data/models/Product.dart';
 
 part 'cart_state.dart';
 
@@ -11,8 +12,8 @@ class CartCubit extends Cubit<CartState> {
     startUp();
   }
 
-  void addToCart(double price) {
-    Cart().valueSetter(price);
+  void addToCart(Product item) {
+    Cart().valueSetter(item);
   }
 
   void startUp() {
