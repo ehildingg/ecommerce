@@ -62,7 +62,7 @@ class BottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final price = routeArgs['price'];
+    final double price = routeArgs['price'];
     return SizedBox(
       height: 50.0,
       child: Row(

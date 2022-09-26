@@ -7,10 +7,17 @@ import '../../data/cart_singleton.dart';
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartState(cart: Cart()));
+  CartCubit() : super(CartState(cart: Cart())) {
+    startUp();
+  }
 
-  void addToCart(price) {
+  void addToCart(double price) {
     Cart().valueSetter(price);
-    emit(CartState(cart: Cart()));
+  }
+
+  void startUp() {
+    Cart().addListener(() {
+      emit(CartState(cart: Cart()));
+    });
   }
 }
