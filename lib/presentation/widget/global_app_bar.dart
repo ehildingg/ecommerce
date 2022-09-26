@@ -24,7 +24,7 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               BlocBuilder<CartCubit, CartState>(
                 builder: (context, state) {
-                  return Text('\$${state.cartSum}');
+                  return Text('\$${state.cart.cartValue.value}');
                 },
               )
             ],

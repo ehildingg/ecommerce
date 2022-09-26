@@ -3,11 +3,10 @@ part of 'cart_cubit.dart';
 // Klassen
 
 class CartState {
-  double cartSum;
-
+  Cart cart;
 //Konstruktor
 
   CartState({
-    required this.cartSum,
+    required this.cart,
   });
 }
