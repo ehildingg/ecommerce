@@ -12,9 +12,9 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     // final detailsId = routeArgs['id'];
-    final detailsName = routeArgs['name'].toString();
+    final detailsName = routeArgs['name'];
 
     return Scaffold(
       appBar: GlobalAppBar(detailsName),
@@ -58,14 +58,11 @@ class BottomNavbar extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  var cartSingleton = Cart();
-  var secondCartSingleton = Cart();
-
   @override
   Widget build(BuildContext context) {
     final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
-    final price = double.parse(routeArgs['price'].toString());
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final price = routeArgs['price'];
     return SizedBox(
       height: 50.0,
       child: Row(
@@ -76,9 +73,7 @@ class BottomNavbar extends StatelessWidget {
             fit: FlexFit.tight,
             flex: 1,
             child: ElevatedButton(
-              onPressed: () {
-                print(cartSingleton.valueGetter);
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
                   shape: const RoundedRectangleBorder(

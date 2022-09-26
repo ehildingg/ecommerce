@@ -7,10 +7,6 @@ class Cart with ChangeNotifier {
   int cartSize = 0;
   ValueNotifier<double> cartValue = ValueNotifier<double>(2.0);
 
-  void example() {
-    print(cartValue);
-  }
-
   double get valueGetter {
     return cartValue.value;
   }

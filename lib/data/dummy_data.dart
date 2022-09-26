@@ -5,7 +5,7 @@ final List<Map> myItems = List.generate(
     (index) => {
           "id": index,
           "name": "Product $index",
-          "price": "${index / 10}"
+          "price": (index / 10)
         }).toList();
 
 double roundDouble(double value, int places) {

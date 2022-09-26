@@ -9,9 +9,9 @@ class DetailsItem extends StatelessWidget {
 
   void onTapProductHandler(index, BuildContext context) {
     Navigator.of(context).pushNamed(DetailsPage.routeName, arguments: {
-      'id': myItems[index]['id'].toString(),
-      'name': myItems[index]['name'].toString(),
-      'price': double.parse(myItems[index]['price']),
+      'id': myItems[index]['id'].toString(), // Ursprungligen... Int
+      'name': myItems[index]['name'], // String
+      'price': myItems[index]['price'] // Double,
     });
   }
 
