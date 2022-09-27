@@ -16,10 +16,14 @@ class Cart with ChangeNotifier {
     for (var item in cartItems.value) {
       sum += item.price;
     }
-    sum = double.parse(sum.toStringAsFixed(3));
+    sum = double.parse(sum.toStringAsFixed(2));
     print(sum);
 
     return sum;
+  }
+
+  List get cartListGetter {
+    return cartItems.value;
   }
 
   void valueSetter(input) {

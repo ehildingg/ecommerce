@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/details_item.dart';
@@ -5,7 +6,16 @@ import '../../data/dummy_data.dart';
 import '../widget/global_app_bar.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key}) {
+    createUser();
+  }
+
+  Future<void> createUser() async {
+    print('i createUser');
+    var user = FirebaseAuth.instance;
+    user.createUserWithEmailAndPassword(
+        email: 'erik.hildingsson@gmail.com', password: '12332535');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +26,7 @@ class Home extends StatelessWidget {
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
-            childAspectRatio: 1,
+            childAspectRatio: 2 / 3,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20,
           ),
