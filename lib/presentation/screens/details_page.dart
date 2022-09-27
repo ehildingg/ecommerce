@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/cart_singleton.dart';
+import '../../data/models/Product.dart';
 import '../widget/global_app_bar.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -12,12 +13,12 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    // final detailsId = routeArgs['id'];
-    final detailsName = routeArgs['name'];
+        ModalRoute.of(context)!.settings.arguments as Map<String, Product>;
+
+    final productName = routeArgs['product']!.name;
 
     return Scaffold(
-      appBar: GlobalAppBar(detailsName),
+      appBar: GlobalAppBar(productName),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 12, left: 10, right: 10),
@@ -61,8 +62,11 @@ class BottomNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final double price = routeArgs['price'];
+        ModalRoute.of(context)!.settings.arguments as Map<String, Product>;
+
+    final Product? product = routeArgs['product'];
+    var productPrice = product!.price;
+
     return SizedBox(
       height: 50.0,
       child: Row(
@@ -106,22 +110,22 @@ class BottomNavbar extends StatelessWidget {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(0)))),
               onPressed: () {
-                BlocProvider.of<CartCubit>(context).addToCart(price);
+                BlocProvider.of<CartCubit>(context).addToCart(product!);
               },
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Icon(
+                  children: <Widget>[
+                    const Icon(
                       Icons.card_travel,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 4.0,
                     ),
                     Text(
-                      "ADD TO BAG",
-                      style: TextStyle(color: Colors.white),
+                      "ADD TO BAG \$$productPrice",
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ],
                 ),

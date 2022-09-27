@@ -1,3 +1,4 @@
+import 'package:ecommerce/data/models/Product.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/details_page.dart';
@@ -8,11 +9,8 @@ class DetailsItem extends StatelessWidget {
   const DetailsItem(this.index, {super.key});
 
   void onTapProductHandler(index, BuildContext context) {
-    Navigator.of(context).pushNamed(DetailsPage.routeName, arguments: {
-      'id': myItems[index]['id'].toString(), // Ursprungligen... Int
-      'name': myItems[index]['name'], // String
-      'price': myItems[index]['price'] // Double,
-    });
+    Navigator.of(context).pushNamed(DetailsPage.routeName,
+        arguments: {'product': myItems[index]});
   }
 
   @override
@@ -26,7 +24,7 @@ class DetailsItem extends StatelessWidget {
           color: Colors.blue,
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Text(myItems[index]['name']),
+        child: Text(myItems[index].name),
       ),
     );
   }

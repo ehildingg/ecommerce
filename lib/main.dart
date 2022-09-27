@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'data/dummy_data.dart';
 import 'presentation/screens/details_page.dart';
 import 'presentation/screens/home_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    populateList();
     return BlocProvider(
       create: (context) => CartCubit(),
       child: MaterialApp(
