@@ -10,6 +10,8 @@ class Home extends StatelessWidget {
     createUser();
   }
 
+  static const routeName = '/home';
+
   Future<void> createUser() async {
     print('i createUser');
     var user = FirebaseAuth.instance;

@@ -19,6 +19,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'presentation/screens/login_page.dart';
+
 // ...
 
 Future<void> main() async {
@@ -39,10 +41,12 @@ class MyApp extends StatelessWidget {
       create: (context) => CartCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Home(),
+        home: FirebaseAuth.instance.currentUser != null ? Home() : LoginPage(),
         routes: {
           DetailsPage.routeName: (context) => DetailsPage(),
           CartPage.routeName: (context) => CartPage(),
+          LoginPage.routeName: (context) => const LoginPage(),
+          Home.routeName: (context) => Home(),
         },
       ),
     );
