@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'home_page.dart';
+
+//USER createUser() -> Får User UUID -> createCart(userUuid)
+//CART -> useruIid -> ARRAY -> ProduktItem
+// getCart(userId), returnerar lista med ProductItems
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,11 +21,20 @@ class _LoginPageState extends State<LoginPage> {
   late String userEmail;
   late String userPassword;
 
+  final db = FirebaseFirestore.instance;
+  final fUser = FirebaseAuth.instance.currentUser;
+
   Future<void> createUser(emailInput, passwordInput) async {
     var user = FirebaseAuth.instance;
     await user.createUserWithEmailAndPassword(
         email: userEmail, password: passwordInput);
+    var userId = user.currentUser?.uid;
+    await createCart(userId);
     NavigateToHome();
+  }
+
+  Future<void> createCart(userUuid) async {
+    db.collection('cart').doc(userUuid).set({'productList': []});
   }
 
   NavigateToHome() {
