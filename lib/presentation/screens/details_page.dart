@@ -110,7 +110,7 @@ class BottomNavbar extends StatelessWidget {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(0)))),
               onPressed: () {
-                BlocProvider.of<CartCubit>(context).addToCart(product!);
+                BlocProvider.of<CartCubit>(context).addToCart(product);
               },
               child: Center(
                 child: Row(

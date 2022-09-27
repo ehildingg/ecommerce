@@ -1,3 +1,6 @@
+import 'package:ecommerce/data/cart_singleton.dart';
+import 'package:ecommerce/presentation/screens/cart_page.dart';
+
 import '../../buisness_logic/cubit/cart_cubit.dart';
 
 import 'package:flutter/material.dart';
@@ -9,6 +12,10 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(60);
 
+  void onPressedCartHandler(BuildContext context) {
+    Navigator.of(context).pushNamed(CartPage.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -19,7 +26,10 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  print('tryck på shopping cart');
+                  onPressedCartHandler(context);
+                },
                 icon: const Icon(Icons.shopping_cart),
               ),
               BlocBuilder<CartCubit, CartState>(
