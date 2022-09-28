@@ -1,0 +1,26 @@
+Create Cart Class as a Singleton
+
+Listen to cart class variable using value notifier
+// Find right position inside bloc/cubit class to introduce value notifier functions
+
+ Nested Scrollview?
+ https://blog.geekyants.com/flutter-e-commerce-backend-app-2d23121fd0c8-2d23121fd0c
+
+
+
+ DataStruktur:
+ Steg 1:
+ Skapa Modeller - Datan som applikationer kommer vara beroende av, borde inte vara direkt linked till firebase databasens namn
+
+ Skapa UserModel, CartModel med "samma" attribut som vi får från databasen
+ UserModel: userName, userEmail, userUuid
+
+För att hämta cart, används userUuid från User
+ cart:  products[]
+
+ Steg 2:
+Skapa DataProvider - API för vår applikation, en klass som hanterar nätverksförbindelsen. Gör t.ex. getters som returnerar "rå data"
+
+
+Steg 3:
+Skapa repository - Där man knyter ihop den råa datan man får från API och konverterar till t.ex. UserModel

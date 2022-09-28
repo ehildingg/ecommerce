@@ -33,6 +33,10 @@ class _LoginPageState extends State<LoginPage> {
     NavigateToHome();
   }
 
+  Future<void> loginUser() async {
+    NavigateToHome();
+  }
+
   Future<void> createCart(userUuid) async {
     db.collection('cart').doc(userUuid).set({'productList': []});
   }
@@ -41,54 +45,134 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context).pushNamed(Home.routeName);
   }
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyLogin = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyRegister = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-            child: Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-                icon: Icon(Icons.person),
-                hintText: 'Email Adress',
-                labelText: 'Email Adress'),
-            validator: (String? emailInput) {
-              if (emailInput == null || emailInput.isEmpty) {
-                return 'Please enter username';
-              } else {
-                userEmail = emailInput;
-                return null;
-              }
-            },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/background.jpg'),
+            fit: BoxFit.fill,
           ),
-          TextFormField(
-            decoration: const InputDecoration(
-                icon: Icon(Icons.password),
-                hintText: 'Password',
-                labelText: 'Password'),
-            validator: (String? passwordInput) {
-              if (passwordInput == null || passwordInput.isEmpty) {
-                return 'Please enter password';
-              } else {
-                userPassword = passwordInput;
-                return null;
-              }
-            },
+        ),
+        child: Center(
+          child: Container(
+            width: 350,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 50),
+                Form(
+                  key: _formKeyLogin,
+                  child: Column(
+                    children: <Widget>[
+                      Text('Login'),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            icon: Icon(Icons.person),
+                            hintText: 'Email Adress',
+                            labelText: 'Email Adress'),
+                        validator: (String? emailInput) {
+                          if (emailInput == null || emailInput.isEmpty) {
+                            return 'Please enter username';
+                          } else {
+                            userEmail = emailInput;
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            icon: Icon(Icons.password),
+                            hintText: 'Password',
+                            labelText: 'Password'),
+                        validator: (String? passwordInput) {
+                          if (passwordInput == null || passwordInput.isEmpty) {
+                            return 'Please enter password';
+                          } else {
+                            userPassword = passwordInput;
+                            return null;
+                          }
+                        },
+                      ),
+                      Padding(padding: EdgeInsets.all(8)),
+                      Center(
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (_formKeyLogin.currentState!.validate()) {
+                                    loginUser();
+                                  }
+                                },
+                                child: Text('Login')),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 50),
+                Form(
+                  key: _formKeyRegister,
+                  child: Column(
+                    children: <Widget>[
+                      Text('Register'),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            icon: Icon(Icons.person),
+                            hintText: 'Email Adress',
+                            labelText: 'Email Adress'),
+                        validator: (String? emailInput) {
+                          if (emailInput == null || emailInput.isEmpty) {
+                            return 'Please enter username';
+                          } else {
+                            userEmail = emailInput;
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            icon: Icon(Icons.password),
+                            hintText: 'Password',
+                            labelText: 'Password'),
+                        validator: (String? passwordInput) {
+                          if (passwordInput == null || passwordInput.isEmpty) {
+                            return 'Please enter password';
+                          } else {
+                            userPassword = passwordInput;
+                            return null;
+                          }
+                        },
+                      ),
+                      Padding(padding: EdgeInsets.all(8)),
+                      Center(
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (_formKeyRegister.currentState!
+                                      .validate()) {
+                                    createUser(userEmail, userPassword);
+                                  }
+                                },
+                                child: Text('Register')),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          Padding(padding: EdgeInsets.all(8)),
-          ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  createUser(userEmail, userPassword);
-                }
-              },
-              child: Text('Logga in'))
-        ],
+        ),
       ),
-    )));
+    );
   }
 }

@@ -8,8 +8,6 @@ class Cart with ChangeNotifier {
 
   ValueNotifier<List<Product>> cartItems = ValueNotifier<List<Product>>([]);
 
-  // double cartValue = 2.0;
-
   double get valueGetter {
     double sum = 0;
 
@@ -17,13 +15,16 @@ class Cart with ChangeNotifier {
       sum += item.price;
     }
     sum = double.parse(sum.toStringAsFixed(2));
-    print(sum);
 
     return sum;
   }
 
   List get cartListGetter {
     return cartItems.value;
+  }
+
+  void cartSetter(input) {
+    cartItems.value = input;
   }
 
   void valueSetter(input) {
