@@ -3,6 +3,8 @@ import 'package:ecommerce/data/repositories/CartRepository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/dataproviders/AuthAPI.dart';
+import '../../data/dataproviders/CartAPI.dart';
 import '../../data/models/cart_singleton.dart';
 import '../../data/repositories/CartRepository.dart';
 import 'home_page.dart';
@@ -31,33 +33,36 @@ class _LoginPageState extends State<LoginPage> {
   final fUser = FirebaseAuth.instance.currentUser;
   final CartRepo cartRepo = CartRepo();
   final cart = Cart();
+  final CartAPI cartApi = CartAPI();
+  AuthAPI auth = AuthAPI();
 
   Future<void> registerUser(emailInput, passwordInput) async {
+    await auth.registerUser(emailInput, passwordInput);
+
     var user = FirebaseAuth.instance;
-    await user.createUserWithEmailAndPassword(
-        email: emailInput, password: passwordInput);
-    var userId = user.currentUser?.uid;
-    await createCart(userId);
-    NavigateToHome();
+    if (user.currentUser != null) {
+      var userId = user.currentUser?.uid;
+      await cartApi.createCartById(userId);
+      NavigateToHome();
+    } else {
+      print('något gick fel med registrera');
+    }
   }
 
   Future<void> loginUser(emailInput, passwordInput) async {
-    print(emailInput + passwordInput);
+    AuthAPI auth = AuthAPI();
+
+    await auth.loginUser(emailInput, passwordInput);
 
     var user = FirebaseAuth.instance;
-    await user.signInWithEmailAndPassword(
-        email: emailInput, password: passwordInput);
 
     if (user.currentUser != null) {
       await cartRepo.getCartListById(user.currentUser?.uid);
+      print(cart.cartListGetter[0].price);
       NavigateToHome();
     } else {
       print('Något gick fel med inloggningingingingg');
     }
-  }
-
-  Future<void> createCart(userUuid) async {
-    db.collection('cart').doc(userUuid).set({'productList': []});
   }
 
   NavigateToHome() {

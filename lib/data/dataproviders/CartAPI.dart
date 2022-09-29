@@ -22,7 +22,39 @@ class CartAPI {
 
     return rawCart;
   }
+
+  Future<void> createCartById(userUuid) async {
+    db.collection('cart').doc(userUuid).set({'productList': []});
+  }
+
+  Future<void> addProductToList(product, userid) async {
+    print('hamnat här iaf');
+    print(product.name);
+    print(product.runtimeType);
+    Map<String, dynamic> test = {
+      'id': product.id,
+      'name': product.name,
+      'price': product.price
+    };
+    print(test.runtimeType);
+    // Funkar, men blir fel struktur
+    // db.collection('cart').doc(userid).update({
+    //   'productList': FieldValue.arrayUnion([
+    //     {product.id, product.name, product.price}
+    //   ]),
+    // });
+
+    // db.collection("cart").doc(userid).set(test);
+
+    db.collection('cart').doc(userid).update({
+      'productList': FieldValue.arrayUnion([test])
+    });
+
+    // db.collection('cart').doc(userid).collection('productList').add(product);
+  }
 }
+
+
 
 
 

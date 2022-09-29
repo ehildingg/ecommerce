@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class User with ChangeNotifier {
-  static final User _user = User._internal();
+class UserSingleton with ChangeNotifier {
+  static final UserSingleton _userSingleton = UserSingleton._internal();
 
   String userId = '';
   String userEmail = '';
@@ -22,9 +22,9 @@ class User with ChangeNotifier {
     this.userEmail = userEmail;
   }
 
-  factory User() {
-    return _user;
+  factory UserSingleton() {
+    return _userSingleton;
   }
 
-  User._internal();
+  UserSingleton._internal();
 }
