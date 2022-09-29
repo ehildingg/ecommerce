@@ -1,4 +1,4 @@
-import 'package:ecommerce/data/models/Product.dart';
+import 'package:ecommerce/data/models/product.dart';
 import 'package:ecommerce/data/models/cart_singleton.dart';
 import 'package:ecommerce/data/dataproviders/CartAPI.dart';
 

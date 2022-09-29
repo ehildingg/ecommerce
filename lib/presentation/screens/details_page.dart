@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/cart_singleton.dart';
-import '../../data/models/Product.dart';
+import '../../data/models/product.dart';
 import '../widget/global_app_bar.dart';
 
 class DetailsPage extends StatelessWidget {

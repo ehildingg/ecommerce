@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:uuid/uuid.dart';
-import "./models/Product.dart";
+import 'models/product.dart';
 
 const uuid = Uuid();
 

@@ -32,6 +32,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+    print('main byggs');
     populateList();
     return BlocProvider(
       create: (context) => CartCubit(),

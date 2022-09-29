@@ -21,31 +21,39 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late String userEmail;
-  late String userPassword;
+  late String userEmailLogin;
+  late String userPasswordLogin;
+
+  late String userEmailRegister;
+  late String userPasswordRegister;
 
   final db = FirebaseFirestore.instance;
   final fUser = FirebaseAuth.instance.currentUser;
   final CartRepo cartRepo = CartRepo();
   final cart = Cart();
 
-  Future<void> createUser(emailInput, passwordInput) async {
+  Future<void> registerUser(emailInput, passwordInput) async {
     var user = FirebaseAuth.instance;
     await user.createUserWithEmailAndPassword(
-        email: userEmail, password: passwordInput);
+        email: emailInput, password: passwordInput);
     var userId = user.currentUser?.uid;
-
-    // await createCart(userId);
-
+    await createCart(userId);
     NavigateToHome();
   }
 
-  Future<void> getCart() async {
-    await cartRepo.getCartListById('UKjXwZVdIxMKOt64YdCHOYmIxDq1');
-  }
+  Future<void> loginUser(emailInput, passwordInput) async {
+    print(emailInput + passwordInput);
 
-  Future<void> loginUser() async {
-    NavigateToHome();
+    var user = FirebaseAuth.instance;
+    await user.signInWithEmailAndPassword(
+        email: emailInput, password: passwordInput);
+
+    if (user.currentUser != null) {
+      await cartRepo.getCartListById(user.currentUser?.uid);
+      NavigateToHome();
+    } else {
+      print('Något gick fel med inloggningingingingg');
+    }
   }
 
   Future<void> createCart(userUuid) async {
@@ -91,12 +99,13 @@ class _LoginPageState extends State<LoginPage> {
                           if (emailInput == null || emailInput.isEmpty) {
                             return 'Please enter username';
                           } else {
-                            userEmail = emailInput;
+                            userEmailLogin = emailInput;
                             return null;
                           }
                         },
                       ),
                       TextFormField(
+                        obscureText: true,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.password),
                             hintText: 'Password',
@@ -105,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (passwordInput == null || passwordInput.isEmpty) {
                             return 'Please enter password';
                           } else {
-                            userPassword = passwordInput;
+                            userPasswordLogin = passwordInput;
                             return null;
                           }
                         },
@@ -117,7 +126,8 @@ class _LoginPageState extends State<LoginPage> {
                             ElevatedButton(
                                 onPressed: () {
                                   if (_formKeyLogin.currentState!.validate()) {
-                                    loginUser();
+                                    loginUser(
+                                        userEmailLogin, userPasswordLogin);
                                   }
                                 },
                                 child: Text('Login')),
@@ -142,12 +152,13 @@ class _LoginPageState extends State<LoginPage> {
                           if (emailInput == null || emailInput.isEmpty) {
                             return 'Please enter username';
                           } else {
-                            userEmail = emailInput;
+                            userEmailRegister = emailInput;
                             return null;
                           }
                         },
                       ),
                       TextFormField(
+                        obscureText: true,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.password),
                             hintText: 'Password',
@@ -156,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (passwordInput == null || passwordInput.isEmpty) {
                             return 'Please enter password';
                           } else {
-                            userPassword = passwordInput;
+                            userPasswordRegister = passwordInput;
                             return null;
                           }
                         },
@@ -167,11 +178,11 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             ElevatedButton(
                                 onPressed: () {
-                                  // if (_formKeyRegister.currentState!
-                                  //     .validate()) {
-
-                                  getCart();
-                                  // }
+                                  if (_formKeyRegister.currentState!
+                                      .validate()) {
+                                    registerUser(userEmailRegister,
+                                        userPasswordRegister);
+                                  }
                                 },
                                 child: Text('Register')),
                           ],

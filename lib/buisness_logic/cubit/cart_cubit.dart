@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/models/cart_singleton.dart';
-import '../../data/models/Product.dart';
+import '../../data/models/product.dart';
 
 part 'cart_state.dart';
 
