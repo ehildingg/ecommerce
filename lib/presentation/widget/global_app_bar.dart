@@ -1,4 +1,4 @@
-import 'package:ecommerce/data/cart_singleton.dart';
+import 'package:ecommerce/data/models/cart_singleton.dart';
 import 'package:ecommerce/presentation/screens/cart_page.dart';
 
 import '../../buisness_logic/cubit/cart_cubit.dart';

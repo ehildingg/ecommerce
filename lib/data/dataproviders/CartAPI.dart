@@ -13,17 +13,14 @@ class CartAPI {
       await docRef.get().then((DocumentSnapshot doc) {
         final data = doc.data() as Map<String, dynamic>;
         rawCart = RawCart(productList: data['productList']);
+
         return rawCart;
       });
     } catch (e) {
       throw new Exception('Fail');
     }
-    print(rawCart.productList);
-    return rawCart;
-  }
 
-  Future<void> testar() async {
-    final ref = db.collection("cart").doc("UKjXwZVdIxMKOt64YdCHOYmIxDq1");
+    return rawCart;
   }
 }
 

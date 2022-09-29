@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce/data/repositories/CartRepository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/models/cart_singleton.dart';
+import '../../data/repositories/CartRepository.dart';
 import 'home_page.dart';
 
 //USER createUser() -> Får User UUID -> createCart(userUuid)
@@ -23,14 +26,22 @@ class _LoginPageState extends State<LoginPage> {
 
   final db = FirebaseFirestore.instance;
   final fUser = FirebaseAuth.instance.currentUser;
+  final CartRepo cartRepo = CartRepo();
+  final cart = Cart();
 
   Future<void> createUser(emailInput, passwordInput) async {
     var user = FirebaseAuth.instance;
     await user.createUserWithEmailAndPassword(
         email: userEmail, password: passwordInput);
     var userId = user.currentUser?.uid;
-    await createCart(userId);
+
+    // await createCart(userId);
+
     NavigateToHome();
+  }
+
+  Future<void> getCart() async {
+    await cartRepo.getCartListById('UKjXwZVdIxMKOt64YdCHOYmIxDq1');
   }
 
   Future<void> loginUser() async {
@@ -156,10 +167,11 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             ElevatedButton(
                                 onPressed: () {
-                                  if (_formKeyRegister.currentState!
-                                      .validate()) {
-                                    createUser(userEmail, userPassword);
-                                  }
+                                  // if (_formKeyRegister.currentState!
+                                  //     .validate()) {
+
+                                  getCart();
+                                  // }
                                 },
                                 child: Text('Register')),
                           ],
