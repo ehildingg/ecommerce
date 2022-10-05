@@ -1,4 +1,3 @@
-import 'package:ecommerce/data/models/product.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/details_page.dart';
@@ -38,19 +37,17 @@ class DetailsItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Center(
-                child: Container(
-                  child: Image.asset(
-                    'images/model1.jpg',
-                    width: 100,
-                    height: 150,
-                  ),
+                child: Image.asset(
+                  'images/model1.jpg',
+                  width: 100,
+                  height: 150,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Padding(
@@ -61,9 +58,10 @@ class DetailsItem extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       myItems[index].name,
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                      style:
+                          const TextStyle(fontSize: 16.0, color: Colors.grey),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2.0,
                     ),
                     Row(
@@ -72,29 +70,31 @@ class DetailsItem extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           "\$${myItems[index].price}",
-                          style: TextStyle(fontSize: 16.0, color: Colors.black),
+                          style: const TextStyle(
+                              fontSize: 16.0, color: Colors.black),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8.0,
                         ),
                         Text(
                           "\$${myItems[index].price}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12.0,
                             color: Colors.grey,
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8.0,
                         ),
                         Text(
                           "${myItems[index].price}% off",
-                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                          style: const TextStyle(
+                              fontSize: 12.0, color: Colors.grey),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8.0,
                     ),
                   ],

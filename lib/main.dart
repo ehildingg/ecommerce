@@ -1,4 +1,3 @@
-import 'package:ecommerce/data/dataproviders/CartAPI.dart';
 import 'package:ecommerce/presentation/screens/cart_page.dart';
 
 import 'package:flutter/material.dart';
@@ -22,26 +21,25 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  var cartApi = CartAPI();
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     FirebaseAuth.instance.signOut();
-    print('main byggs');
     populateList();
     return BlocProvider(
       create: (context) => CartCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: FirebaseAuth.instance.currentUser != null ? Home() : LoginPage(),
+        home: FirebaseAuth.instance.currentUser != null
+            ? Home()
+            : const LoginPage(),
         routes: {
-          DetailsPage.routeName: (context) => DetailsPage(),
+          DetailsPage.routeName: (context) => const DetailsPage(),
           CartPage.routeName: (context) => CartPage(),
           LoginPage.routeName: (context) => const LoginPage(),
           Home.routeName: (context) => Home(),

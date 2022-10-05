@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce/data/repositories/CartRepository.dart';
+import 'package:ecommerce/data/repositories/cart_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/dataproviders/AuthAPI.dart';
-import '../../data/dataproviders/CartAPI.dart';
+import '../../data/dataproviders/auth_api.dart';
 import '../../data/models/cart_singleton.dart';
-import '../../data/repositories/CartRepository.dart';
 import 'home_page.dart';
 
 //USER createUser() -> Får User UUID -> createCart(userUuid)
@@ -31,9 +29,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final db = FirebaseFirestore.instance;
   final fUser = FirebaseAuth.instance.currentUser;
-  final CartRepo cartRepo = CartRepo();
+  final CartRepository cartRepository = CartRepository();
   final cart = Cart();
-  final CartAPI cartApi = CartAPI();
   AuthAPI auth = AuthAPI();
 
   Future<void> registerUser(emailInput, passwordInput) async {
@@ -42,8 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     var user = FirebaseAuth.instance;
     if (user.currentUser != null) {
       var userId = user.currentUser?.uid;
-      await cartApi.createCartById(userId);
-      NavigateToHome();
+      await cartRepository.createCartById(userId);
+      navigateToHome();
     } else {
       print('något gick fel med registrera');
     }
@@ -57,15 +54,15 @@ class _LoginPageState extends State<LoginPage> {
     var user = FirebaseAuth.instance;
 
     if (user.currentUser != null) {
-      await cartRepo.getCartListById(user.currentUser?.uid);
+      await cartRepository.getCartListById(user.currentUser?.uid);
       print(cart.cartListGetter[0].price);
-      NavigateToHome();
+      navigateToHome();
     } else {
       print('Något gick fel med inloggningingingingg');
     }
   }
 
-  NavigateToHome() {
+  navigateToHome() {
     Navigator.of(context).pushNamed(Home.routeName);
   }
 
@@ -83,18 +80,18 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: 350,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Form(
                   key: _formKeyLogin,
                   child: Column(
                     children: <Widget>[
-                      Text('Login'),
+                      const Text('Login'),
                       TextFormField(
                         decoration: const InputDecoration(
                             icon: Icon(Icons.person),
@@ -124,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                       ),
-                      Padding(padding: EdgeInsets.all(8)),
+                      const Padding(padding: EdgeInsets.all(8)),
                       Center(
                         child: Column(
                           children: [
@@ -135,19 +132,19 @@ class _LoginPageState extends State<LoginPage> {
                                         userEmailLogin, userPasswordLogin);
                                   }
                                 },
-                                child: Text('Login')),
+                                child: const Text('Login')),
                           ],
                         ),
                       )
                     ],
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Form(
                   key: _formKeyRegister,
                   child: Column(
                     children: <Widget>[
-                      Text('Register'),
+                      const Text('Register'),
                       TextFormField(
                         decoration: const InputDecoration(
                             icon: Icon(Icons.person),
@@ -177,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                       ),
-                      Padding(padding: EdgeInsets.all(8)),
+                      const Padding(padding: EdgeInsets.all(8)),
                       Center(
                         child: Column(
                           children: [
@@ -189,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                                         userPasswordRegister);
                                   }
                                 },
-                                child: Text('Register')),
+                                child: const Text('Register')),
                           ],
                         ),
                       )
