@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/details_item.dart';
@@ -6,18 +5,9 @@ import '../../data/dummy_data.dart';
 import '../widget/global_app_bar.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key}) {
-    createUser();
-  }
+  const Home({super.key});
 
   static const routeName = '/home';
-
-  Future<void> createUser() async {
-    print('i createUser');
-    var user = FirebaseAuth.instance;
-    user.createUserWithEmailAndPassword(
-        email: 'erik.hildingsson@gmail.com', password: '12332535');
-  }
 
   @override
   Widget build(BuildContext context) {

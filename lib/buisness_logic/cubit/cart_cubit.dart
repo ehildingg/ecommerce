@@ -14,10 +14,24 @@ class CartCubit extends Cubit<CartState> {
   CartRepository cartRepository = CartRepository();
   UserSingleton user = UserSingleton();
 
-  void addToCart(Product item) {
-    Cart().valueSetter(
-        item); // Detta ska tas bort, valueSetter ska sättas utifrån vad som finns i Firestore
-    cartRepository.addProductToList(item, user.getUserId());
+  Future<void> updateCart() async {
+    List updatedCartList = [];
+    await cartRepository
+        .getCartListById(user.userId)
+        .then((value) => updatedCartList = value);
+    Cart().cartSetter(updatedCartList);
+    emit(CartState(cart: Cart()));
+  }
+
+  Future<void> addToCart(Product item) async {
+    await cartRepository.addProductToList(item, user.getUserId());
+    List updatedCartList = [];
+    await cartRepository
+        .getCartListById(user.userId)
+        .then((value) => updatedCartList = value);
+
+    Cart().cartSetter(updatedCartList);
+    emit(CartState(cart: Cart()));
   }
 
   void startUp() {

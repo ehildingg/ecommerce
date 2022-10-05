@@ -10,16 +10,15 @@ class CartRepository {
 
 // Konvertera från rawCart till Cart
 
-  Future<void> getCartListById(id) async {
+  Future<List> getCartListById(id) async {
     final FirestoreCart rawCart = await getCartByUserIdfromFirestore(id);
-    Cart cart = Cart();
 
     List<Product> list = [];
     rawCart.productList.forEach((element) {
       list.add(Product(
           id: element['id'], name: element['name'], price: element['price']));
     });
-    cart.cartSetter(list);
+    return list;
   }
 
   Future<FirestoreCart> getCartByUserIdfromFirestore(id) async {

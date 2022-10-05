@@ -2,6 +2,7 @@ import 'package:ecommerce/presentation/screens/cart_page.dart';
 
 import 'package:flutter/material.dart';
 
+import 'buisness_logic/cubit/bloc/authentication_bloc.dart';
 import 'data/dummy_data.dart';
 import 'presentation/screens/details_page.dart';
 import 'presentation/screens/home_page.dart';
@@ -31,8 +32,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseAuth.instance.signOut();
     populateList();
-    return BlocProvider(
-      create: (context) => CartCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CartCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AuthenticationBloc(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: FirebaseAuth.instance.currentUser != null
