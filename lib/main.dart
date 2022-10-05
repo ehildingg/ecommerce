@@ -44,13 +44,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: FirebaseAuth.instance.currentUser != null
-            ? Home()
+            ? const Home()
             : const LoginPage(),
         routes: {
           DetailsPage.routeName: (context) => const DetailsPage(),
           CartPage.routeName: (context) => CartPage(),
           LoginPage.routeName: (context) => const LoginPage(),
-          Home.routeName: (context) => Home(),
+          Home.routeName: (context) => const Home(),
         },
       ),
     );

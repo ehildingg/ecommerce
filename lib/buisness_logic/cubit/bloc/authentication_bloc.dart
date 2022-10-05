@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:ecommerce/data/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
+
+import 'package:ecommerce/data/repositories/user_repository.dart';
 
 import '../../../data/models/user_singleton.dart';
 
@@ -12,13 +13,13 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(const AuthenticationState()) {
-    on<LoginStarted>(_LoginStarted);
-    on<RegistrationStarted>(_RegistrationStarted);
+    on<LoginStarted>(_loginStarted);
+    on<RegistrationStarted>(_registrationStarted);
   }
 
   UserRepository userRepository = UserRepository();
 
-  FutureOr<void> _LoginStarted(
+  FutureOr<void> _loginStarted(
       LoginStarted event, Emitter<AuthenticationState> emit) async {
     emit(state.copyWith(isLoading: true));
 
@@ -32,7 +33,7 @@ class AuthenticationBloc
     }
   }
 
-  FutureOr<void> _RegistrationStarted(
+  FutureOr<void> _registrationStarted(
       RegistrationStarted event, Emitter<AuthenticationState> emit) async {
     emit(state.copyWith(isLoading: true));
 

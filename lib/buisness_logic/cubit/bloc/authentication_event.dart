@@ -8,11 +8,11 @@ abstract class AuthenticationEvent {
 class LoginStarted extends AuthenticationEvent {
   final String userEmail;
   final String userPassword;
-  LoginStarted(this.userEmail, this.userPassword);
+  const LoginStarted(this.userEmail, this.userPassword);
 }
 
 class RegistrationStarted extends AuthenticationEvent {
   final String userEmail;
   final String userPassword;
-  RegistrationStarted(this.userEmail, this.userPassword);
+  const RegistrationStarted(this.userEmail, this.userPassword);
 }

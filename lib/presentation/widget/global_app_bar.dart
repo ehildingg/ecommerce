@@ -26,7 +26,6 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  print('tryck på shopping cart');
                   onPressedCartHandler(context);
                 },
                 icon: const Icon(Icons.shopping_cart),
