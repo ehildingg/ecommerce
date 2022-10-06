@@ -1,7 +1,7 @@
-import 'package:ecommerce/buisness_logic/cubit/bloc/authentication_bloc.dart';
+import 'package:ecommerce/buisness_logic//bloc/authentication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../buisness_logic/cubit/cart_cubit.dart';
+import '../../buisness_logic/bloc/cart_bloc.dart';
 import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           if (state is Authenticated) {
-            BlocProvider.of<CartCubit>(context).updateCart();
+            context.read<CartBloc>().add(CartUpdated());
             navigateToHome();
           }
         },

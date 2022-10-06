@@ -2,7 +2,7 @@ import 'package:ecommerce/presentation/widget/global_app_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/cart_singleton.dart';
-import '../../data/models/product.dart';
+import '../../data/models/Product.dart';
 import 'details_page.dart';
 
 class CartPage extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:ecommerce/presentation/screens/cart_page.dart';
 
-import '../../buisness_logic/cubit/bloc/authentication_bloc.dart';
-import '../../buisness_logic/cubit/cart_cubit.dart';
+import '../../buisness_logic//bloc/authentication_bloc.dart';
+import '../../buisness_logic/bloc/cart_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,12 +31,12 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 icon: const Icon(Icons.shopping_cart),
               ),
-              BlocBuilder<CartCubit, CartState>(
+              SizedBox(width: 20),
+              BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
-                  return Text('\$${state.cart.valueGetter}');
+                  return Text('${state.cart.valueGetter}');
                 },
               ),
-              const SizedBox(width: 20),
               IconButton(
                   onPressed: () =>
                       context.read<AuthenticationBloc>().add(LogoutStarted()),
