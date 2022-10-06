@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CartRepository {
   var db = FirebaseFirestore.instance;
-
 // Konvertera från rawCart till Cart
 
   Future<List> getCartListById(id) async {
@@ -14,8 +13,9 @@ class CartRepository {
 
     List<Product> list = [];
     rawCart.productList.forEach((element) {
+      var price = element['price'].toDouble();
       list.add(Product(
-          id: element['id'], name: element['name'], price: element['price']));
+          id: element['id'], name: element['name'], price: price));
     });
     return list;
   }
