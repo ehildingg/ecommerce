@@ -4,27 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../buisness_logic/bloc/cart_bloc.dart';
 import 'home_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
 
   static const routeName = '/login';
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   late String userEmailLogin;
+
   late String userPasswordLogin;
 
   late String userEmailRegister;
+
   late String userPasswordRegister;
 
-  navigateToHome() {
+  navigateToHome(BuildContext context) {
     Navigator.of(context).pushNamed(Home.routeName);
   }
 
   final GlobalKey<FormState> _formKeyLogin = GlobalKey<FormState>();
+
   final GlobalKey<FormState> _formKeyRegister = GlobalKey<FormState>();
 
   @override
@@ -34,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
         listener: (context, state) {
           if (state is Authenticated) {
             context.read<CartBloc>().add(CartUpdated());
-            navigateToHome();
+            navigateToHome(context);
           }
         },
         child: Container(

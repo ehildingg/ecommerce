@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: FirebaseAuth.instance.currentUser != null
             ? const Home()
-            : const LoginPage(),
+            : LoginPage(),
         routes: {
           DetailsPage.routeName: (context) => const DetailsPage(),
           CartPage.routeName: (context) => CartPage(),
-          LoginPage.routeName: (context) => const LoginPage(),
+          LoginPage.routeName: (context) => LoginPage(),
           Home.routeName: (context) => const Home(),
         },
       ),
