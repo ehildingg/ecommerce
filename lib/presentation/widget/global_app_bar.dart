@@ -1,6 +1,6 @@
-import 'package:ecommerce/data/models/cart_singleton.dart';
 import 'package:ecommerce/presentation/screens/cart_page.dart';
 
+import '../../buisness_logic/cubit/bloc/authentication_bloc.dart';
 import '../../buisness_logic/cubit/cart_cubit.dart';
 
 import 'package:flutter/material.dart';
@@ -27,7 +27,6 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  print('tryck på shopping cart');
                   onPressedCartHandler(context);
                 },
                 icon: const Icon(Icons.shopping_cart),
@@ -36,7 +35,12 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
                 builder: (context, state) {
                   return Text('\$${state.cart.valueGetter}');
                 },
-              )
+              ),
+              const SizedBox(width: 20),
+              IconButton(
+                  onPressed: () =>
+                      context.read<AuthenticationBloc>().add(LogoutStarted()),
+                  icon: const Icon(Icons.logout_outlined)),
             ],
           ),
         ),

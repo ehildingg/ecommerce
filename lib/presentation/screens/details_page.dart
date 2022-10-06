@@ -2,12 +2,11 @@ import 'package:ecommerce/buisness_logic/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/cart_singleton.dart';
 import '../../data/models/product.dart';
 import '../widget/global_app_bar.dart';
 
 class DetailsPage extends StatelessWidget {
-  DetailsPage({super.key});
+  const DetailsPage({super.key});
   static const routeName = '/details';
 
   @override
@@ -50,12 +49,12 @@ class DetailsPage extends StatelessWidget {
   }
 
   _buildBottomNavigationBar() {
-    return BottomNavbar();
+    return const BottomNavbar();
   }
 }
 
 class BottomNavbar extends StatelessWidget {
-  BottomNavbar({
+  const BottomNavbar({
     Key? key,
   }) : super(key: key);
 

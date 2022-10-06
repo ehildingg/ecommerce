@@ -1,11 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/data/models/user_singleton.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:meta/meta.dart';
-
-import '../../data/dataproviders/CartAPI.dart';
+import 'package:ecommerce/data/repositories/cart_repository.dart';
 import '../../data/models/cart_singleton.dart';
 import '../../data/models/product.dart';
 
@@ -16,25 +11,27 @@ class CartCubit extends Cubit<CartState> {
     startUp();
   }
 
-  CartAPI cartApi = CartAPI();
+  CartRepository cartRepository = CartRepository();
   UserSingleton user = UserSingleton();
 
-  void cartToFirebase() async {
-    // final db = FirebaseFirestore.instance;
-
-    // final docRef = db.collection("users").doc("QKLayruqBDl7tjPQxZbX");
-    // docRef.get().then(
-    //   (DocumentSnapshot doc) {
-    //     final data = doc.data() as Map<String, dynamic>;
-    //     print(data);
-    //   },
-    //   onError: (e) => print("You messed up, $e"),
-    // );
+  Future<void> updateCart() async {
+    List updatedCartList = [];
+    await cartRepository
+        .getCartListById(user.userId)
+        .then((value) => updatedCartList = value);
+    Cart().cartSetter(updatedCartList);
+    emit(CartState(cart: Cart()));
   }
 
-  void addToCart(Product item) {
-    Cart().valueSetter(item);
-    cartApi.addProductToList(item, user.getUserId());
+  Future<void> addToCart(Product item) async {
+    await cartRepository.addProductToList(item, user.getUserId());
+    List updatedCartList = [];
+    await cartRepository
+        .getCartListById(user.userId)
+        .then((value) => updatedCartList = value);
+
+    Cart().cartSetter(updatedCartList);
+    emit(CartState(cart: Cart()));
   }
 
   void startUp() {

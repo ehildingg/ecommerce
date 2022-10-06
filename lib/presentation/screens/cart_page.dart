@@ -12,7 +12,6 @@ class CartPage extends StatelessWidget {
   var cart = Cart();
 
   void onTapProductHandler(Product product, BuildContext context) {
-    print(product);
     Navigator.of(context)
         .pushNamed(DetailsPage.routeName, arguments: {'product': product});
   }
@@ -20,16 +19,9 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cartList = cart.cartListGetter;
-    final List<String> dummyList = <String>[
-      'HEJ!',
-      'blablabla',
-      'Random sträng',
-      'Test 74',
-      'Produkt 52',
-    ];
 
     return Scaffold(
-        appBar: GlobalAppBar('Shopping Cart'),
+        appBar: const GlobalAppBar('Shopping Cart'),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemBuilder: (BuildContext context, int index) {
