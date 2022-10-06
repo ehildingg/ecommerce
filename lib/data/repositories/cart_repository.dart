@@ -12,11 +12,10 @@ class CartRepository {
     final FirestoreCart rawCart = await getCartByUserIdfromFirestore(id);
 
     List<Product> list = [];
-    rawCart.productList.forEach((element) {
+    for (var element in rawCart.productList) {
       var price = element['price'].toDouble();
-      list.add(Product(
-          id: element['id'], name: element['name'], price: price));
-    });
+      list.add(Product(id: element['id'], name: element['name'], price: price));
+    }
     return list;
   }
 
