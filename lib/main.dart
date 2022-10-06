@@ -1,3 +1,4 @@
+import 'package:ecommerce/buisness_logic/bloc/cart_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ecommerce/presentation/screens/cart_page.dart';
 
-import 'buisness_logic/cubit/bloc/authentication_bloc.dart';
-import 'buisness_logic/cubit/cart_cubit.dart';
+import 'buisness_logic//bloc/authentication_bloc.dart';
 import 'data/dummy_data.dart';
 import 'firebase_options.dart';
 import 'presentation/screens/details_page.dart';
@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => CartCubit(),
+          create: (context) => AuthenticationBloc(),
         ),
         BlocProvider(
-          create: (context) => AuthenticationBloc(),
+          create: (context) => CartBloc(),
         ),
       ],
       child: MaterialApp(

@@ -1,13 +1,13 @@
-part of 'cart_cubit.dart';
+// part of 'cart_cubit.dart';
 
-// Klassen
+// // Klassen
 
-class CartState {
-  Cart cart;
+// class CartState {
+//   Cart cart;
 
-//Konstruktor
+// //Konstruktor
 
-  CartState({
-    required this.cart,
-  });
-}
+//   CartState({
+//     required this.cart,
+//   });
+// }
