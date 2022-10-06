@@ -1,8 +1,9 @@
+import 'package:ecommerce/buisness_logic/bloc/cart_bloc.dart';
 import 'package:ecommerce/buisness_logic/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/product.dart';
+import '../../data/models/Product.dart';
 import '../widget/global_app_bar.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -109,7 +110,8 @@ class BottomNavbar extends StatelessWidget {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(0)))),
               onPressed: () {
-                BlocProvider.of<CartCubit>(context).addToCart(product);
+                // BlocProvider.of<CartCubit>(context).addToCart(product);
+                context.read<CartBloc>().add(ProductAdded(product));
               },
               child: Center(
                 child: Row(
