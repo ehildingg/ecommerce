@@ -1,18 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ecommerce/presentation/screens/cart_page.dart';
 
-import 'package:flutter/material.dart';
-
 import 'buisness_logic/cubit/bloc/authentication_bloc.dart';
+import 'buisness_logic/cubit/cart_cubit.dart';
 import 'data/dummy_data.dart';
+import 'firebase_options.dart';
 import 'presentation/screens/details_page.dart';
 import 'presentation/screens/home_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'buisness_logic/cubit/cart_cubit.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'presentation/screens/login_page.dart';
 
 // ...
@@ -30,7 +28,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth.instance.signOut();
     populateList();
     return MultiBlocProvider(
       providers: [

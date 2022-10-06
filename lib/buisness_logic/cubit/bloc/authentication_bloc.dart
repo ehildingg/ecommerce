@@ -15,6 +15,7 @@ class AuthenticationBloc
   AuthenticationBloc() : super(const AuthenticationState()) {
     on<LoginStarted>(_loginStarted);
     on<RegistrationStarted>(_registrationStarted);
+    on<LogoutStarted>(_logoutStarted);
   }
 
   UserRepository userRepository = UserRepository();
@@ -40,6 +41,20 @@ class AuthenticationBloc
     try {
       await userRepository.registerUser(event.userEmail, event.userPassword);
       emit(Authenticated());
+    } on UserException catch (e) {
+      emit(state.copyWith(error: e));
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  FutureOr<void> _logoutStarted(
+      LogoutStarted event, Emitter<AuthenticationState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
+    try {
+      await userRepository.logoutUser();
+      emit(UnAuthenticated());
     } on UserException catch (e) {
       emit(state.copyWith(error: e));
     } finally {

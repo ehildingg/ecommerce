@@ -49,3 +49,5 @@ class UserException implements Exception {
 }
 
 class Authenticated extends AuthenticationState {}
+
+class UnAuthenticated extends AuthenticationState {}

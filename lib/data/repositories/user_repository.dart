@@ -29,4 +29,8 @@ class UserRepository {
       await cartRepository.createCartById(user.currentUser!.uid);
     }
   }
+
+  Future<void> logoutUser() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

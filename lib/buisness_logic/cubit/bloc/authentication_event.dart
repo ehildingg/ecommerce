@@ -16,3 +16,5 @@ class RegistrationStarted extends AuthenticationEvent {
   final String userPassword;
   const RegistrationStarted(this.userEmail, this.userPassword);
 }
+
+class LogoutStarted extends AuthenticationEvent {}
