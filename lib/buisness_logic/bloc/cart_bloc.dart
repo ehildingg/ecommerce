@@ -15,6 +15,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartState(cart: Cart())) {
     on<ProductAdded>(_onProductAdded);
     on<CartUpdated>(_onCartUpdated);
+    on<ListenToCart>(_listenToCart);
   }
 
   final CartRepository _cartRepository = CartRepository();
@@ -39,6 +40,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         .getCartListById(user.userId)
         .then((value) => updatedCartList = value);
     Cart().cartSetter(updatedCartList);
+    emit(CartState(cart: Cart()));
+  }
+
+  FutureOr<void> _listenToCart(
+      ListenToCart event, Emitter<CartState> emit) async {
+    await _cartRepository.updateCartList();
     emit(CartState(cart: Cart()));
   }
 }

@@ -9,3 +9,5 @@ class ProductAdded extends CartEvent {
 }
 
 class CartUpdated extends CartEvent {}
+
+class ListenToCart extends CartEvent {}

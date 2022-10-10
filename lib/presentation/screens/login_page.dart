@@ -19,6 +19,7 @@ class LoginPage extends StatelessWidget {
 
   navigateToHome(BuildContext context) {
     Navigator.of(context).pushNamed(Home.routeName);
+    context.read<CartBloc>().add(ListenToCart());
   }
 
   final GlobalKey<FormState> _formKeyLogin = GlobalKey<FormState>();
