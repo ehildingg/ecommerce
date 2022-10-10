@@ -25,24 +25,6 @@ class CartRepository {
     });
   }
 
-  FirestoreCart updatedCartFromFirestore() {
-    final docRef = db.collection('cart').doc(UserSingleton().userId);
-    FirestoreCart rawCart = FirestoreCart(productList: []);
-    var data;
-    try {
-      docRef.snapshots().listen((event) {
-        print("current data: ${event.data()}");
-        final data = event.data() as Map<String, dynamic>;
-        rawCart = FirestoreCart(productList: data['productList']);
-        onError:
-        (error) => print("Listen failed: $error");
-      });
-    } catch (e) {
-      throw Exception('failed $e');
-    }
-    return rawCart;
-  }
-
   Future<FirestoreCart> getCartByUserIdfromFirestore(id) async {
     FirestoreCart rawCart = FirestoreCart(productList: []);
     try {
@@ -71,14 +53,38 @@ class CartRepository {
     return list;
   }
 
-  Future<List> updateCartList() async {
-    final FirestoreCart rawCart = await updatedCartFromFirestore();
-
+  Stream<List> updatedCartFromFirestore() async* {
+    final docRef = db.collection('cart').doc(UserSingleton().userId);
+    FirestoreCart rawCart = FirestoreCart(productList: []);
     List<Product> list = [];
-    for (var element in rawCart.productList) {
-      var price = element['price'].toDouble();
-      list.add(Product(id: element['id'], name: element['name'], price: price));
+    try {
+      docRef.snapshots().listen((event) {
+        print("current data: ${event.data()}");
+        final data = event.data() as Map<String, dynamic>;
+        rawCart = FirestoreCart(productList: data['productList']);
+        for (var element in rawCart.productList) {
+          var price = element['price'].toDouble();
+          list.add(
+              Product(id: element['id'], name: element['name'], price: price));
+        }
+        onError:
+        (error) => print("Listen failed: $error");
+      });
+    } catch (e) {
+      throw Exception('failed $e');
     }
-    return list;
+    yield list;
   }
+
+  // Future<List> updateCartList() async {
+  //   final FirestoreCart rawCart = await updatedCartFromFirestore();
+
+  //   List<Product> list = [];
+  //   for (var element in rawCart.productList) {
+  //     var price = element['price'].toDouble();
+  //     list.add(Product(id: element['id'], name: element['name'], price: price));
+  //   }
+  //   return list;
+  // }
+
 }

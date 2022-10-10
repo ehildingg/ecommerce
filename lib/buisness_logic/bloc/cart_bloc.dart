@@ -45,7 +45,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   FutureOr<void> _listenToCart(
       ListenToCart event, Emitter<CartState> emit) async {
-    await _cartRepository.updateCartList();
+    //  var stream = _cartRepository.updatedCartFromFirestore();
+    // Cart().cartSetter(stream);
+    // print('i listenToCart i cart_bloc');
+    // emit(CartState(cart: Cart()));
+    await emit.onEach(stream, onData: (stream) => Cart().cartSetter(stream));
     emit(CartState(cart: Cart()));
   }
 }
+
+// on<_TickerTicked>((event, emit) => emit(TickerTickSuccess(event.tick)));
+
+// await emit.onEach<int>(
+//           ticker.tick(),
+//           onData: (tick) => add(_TickerTicked(tick)),
+//         );
+//         emit(const TickerComplete());
+//       },

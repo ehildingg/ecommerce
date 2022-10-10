@@ -34,7 +34,11 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
               const SizedBox(width: 20),
               BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
-                  return Text('${state.cart.valueGetter}');
+                  if (state is ListenToCart) {
+                    return Text('${state.cart.valueGetter}');
+                  } else {
+                    return Text('${state.cart.valueGetter} +1 ');
+                  }
                 },
               ),
               IconButton(

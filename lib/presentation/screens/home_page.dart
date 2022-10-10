@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic//bloc/authentication_bloc.dart';
+import '../../buisness_logic/bloc/cart_bloc.dart';
 import '../widget/details_item.dart';
 import '../../data/dummy_data.dart';
 import '../widget/global_app_bar.dart';
@@ -39,6 +40,11 @@ class Home extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.read<CartBloc>().add(ListenToCart()),
+        tooltip: 'Start',
+        child: const Icon(Icons.timer),
+      ),
     );
   }
 
