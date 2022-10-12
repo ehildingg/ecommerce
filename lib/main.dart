@@ -1,4 +1,5 @@
 import 'package:ecommerce/buisness_logic/bloc/cart_bloc.dart';
+import 'package:ecommerce/presentation/screens/categories_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           CartPage.routeName: (context) => CartPage(),
           LoginPage.routeName: (context) => LoginPage(),
           Home.routeName: (context) => const Home(),
+          CategoriesPage.routeName: (context) => CategoriesPage(),
         },
       ),
     );

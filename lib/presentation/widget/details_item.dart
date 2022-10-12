@@ -31,11 +31,9 @@ class DetailsItem extends StatelessWidget {
     return InkWell(
       onTap: () => onTapProductHandler(index, context),
       child: Card(
-          elevation: 10.0,
+          elevation: 5.0,
           shadowColor: Colors.blue,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const SizedBox(
                 height: 12,
@@ -53,8 +51,6 @@ class DetailsItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
                       myItems[index].name,
@@ -76,21 +72,8 @@ class DetailsItem extends StatelessWidget {
                         const SizedBox(
                           width: 8.0,
                         ),
-                        Text(
-                          "\$${myItems[index].price}",
-                          style: const TextStyle(
-                            fontSize: 12.0,
-                            color: Colors.grey,
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                        ),
                         const SizedBox(
                           width: 8.0,
-                        ),
-                        Text(
-                          "${myItems[index].price}% off",
-                          style: const TextStyle(
-                              fontSize: 12.0, color: Colors.grey),
                         ),
                       ],
                     ),

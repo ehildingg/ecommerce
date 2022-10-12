@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic//bloc/authentication_bloc.dart';
+import '../widget/bottom_navbar.dart';
 import '../widget/details_item.dart';
 import '../../data/dummy_data.dart';
 import '../widget/global_app_bar.dart';
@@ -38,30 +39,13 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
-  _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      items: const [
-        BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.blue),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.category), label: 'Categories'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-            backgroundColor: Colors.blue),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-            backgroundColor: Colors.blue),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Bag')
-      ],
-    );
+  _buildBottomNavigationBar(BuildContext context) {
+    int _selectedIndex = 0;
+    return BottomNavbar(selectedIndex: _selectedIndex);
   }
 
   void navigateToLogin(BuildContext context) {
