@@ -41,4 +41,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     Cart().cartSetter(updatedCartList);
     emit(CartState(cart: Cart()));
   }
+
+  listenOnStream() {
+    _cartRepository.databaseStream.listen((event) {
+      print('kommer vi hit?');
+      print(event.docs);
+      for (var doc in event.docs) {
+        print(doc.data());
+        print('hit då?');
+      }
+    });
+  }
 }

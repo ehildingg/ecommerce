@@ -1,4 +1,5 @@
 import 'package:ecommerce/data/models/Product.dart';
+import 'package:ecommerce/data/models/user_singleton.dart';
 
 import '../dataproviders/firestore_cart.dart';
 
@@ -50,4 +51,10 @@ class CartRepository {
       'productList': FieldValue.arrayUnion([productToFirestore])
     });
   }
+
+  final Stream<QuerySnapshot> databaseStream = FirebaseFirestore.instance
+      .collection('cart')
+      .doc('EFMaISPAkdbVzieOPLPrgt9nXJ82')
+      .collection('productList')
+      .snapshots();
 }

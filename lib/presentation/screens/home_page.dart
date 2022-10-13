@@ -1,3 +1,4 @@
+import 'package:ecommerce/buisness_logic/bloc/cart_bloc.dart';
 import 'package:ecommerce/presentation/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<CartBloc>(context).listenOnStream();
     return Scaffold(
       appBar: const GlobalAppBar('Home'),
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
